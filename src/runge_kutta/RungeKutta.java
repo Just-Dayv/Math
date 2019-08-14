@@ -4,7 +4,7 @@ import org.mariuszgromada.math.mxparser.Function;
 
 import java.util.Scanner;
 
-public class RungeKutta {
+public class    RungeKutta {
     private static Function function;
     private static double stepSize;
     public static void main(String[] args) {
@@ -114,15 +114,15 @@ public class RungeKutta {
 
     public static double calculateRk3(double xValue, double yValue, int i){
         double F1 = stepSize * function.calculate(xValue,yValue);
-        System.out.printf("F1 = f(x,y) * stepsize = %f\n",F1);
+        System.out.printf("F_1 = f(x,y) * stepsize = %f\n",F1);
 
         double F2 = stepSize * function.calculate(xValue+stepSize/2, yValue+F1/2);
-        System.out.printf("F2 = f(x+h/2,y+F1/2)* stepsize = %f\n",F2);
+        System.out.printf("F_2 = f(\\left \\frac{x+h}{2}, \\frac{y+F1}{2}\\right)* stepsize = %f\n",F2);
 
         double F3 = stepSize * function.calculate(xValue+ 3*stepSize/4, yValue+3*F2/4);
-        System.out.printf("F3 = f(x+ 3*h/4,y+ 3*F2/4)* stepsize = %f\n",F3);
+        System.out.printf("F_3 = f(\\left x+\\frac{3h}{4},y+ \\frac{3F_2}{4}\\right)* stepsize = %f\n",F3);
 
-        System.out.printf("y%d = %.2f + (2 * %.2f + 3 * %.2f + * 4 * %.2f)/9 \n", i+1, yValue,F1, F2,F3);
+        System.out.printf("y_{%d} = %.2f + \\frac {2\\left(%.2f + 3 (%.2f) +  4 (%.2f)\\right)}{9} \n", i+1, yValue,F1, F2,F3);
 
         return yValue + (2*F1 +3*F2+ 4*F3)/9  ;
     }

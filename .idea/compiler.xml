@@ -20,7 +20,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Math" target="1.8" />
+      <module name="Math" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

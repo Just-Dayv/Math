@@ -33,6 +33,7 @@
                                 <String fx:value="ODE" />
                                 <String fx:value="Nonlinear Methods" />
                                 <String fx:value="System of Equations" />
+                                <String fx:value="Interpolation"/>
                             </FXCollections>
                         </items>
 
@@ -49,7 +50,7 @@
                     </ComboBox>
                 </children>
             </HBox>
-         <Button mnemonicParsing="false" text="Proceed" onAction="#proceed"/>
+         <Button fx:id="proceedButton" mnemonicParsing="false" onAction="#proceed" text="Proceed" />
         </VBox>
     </center>
 </BorderPane>

@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
@@ -22,24 +23,25 @@
                         <Insets top="70.0" />
                     </VBox.margin>
                 </Label>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="CENTER" prefHeight="255.0" prefWidth="600.0">
                <children>
-                  <GridPane prefHeight="135.0" prefWidth="600.0">
+                  <GridPane prefHeight="174.0" prefWidth="600.0">
                     <columnConstraints>
                       <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="357.0" minWidth="10.0" prefWidth="252.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="515.0" minWidth="10.0" prefWidth="348.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <VBox.margin>
                         <Insets top="40.0" />
                      </VBox.margin>
                      <children>
                         <Label text="Initial Value" />
-                        <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="90.0" GridPane.columnIndex="1" fx:id="initialValue">
+                        <TextField fx:id="initialValue" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="90.0" GridPane.columnIndex="1">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -47,8 +49,8 @@
                               <Insets left="20.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Label text="Second guess Value" GridPane.rowIndex="1" />
-                        <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="90.0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="finalValue">
+                        <Label text="Second guess Value" GridPane.rowIndex="2" />
+                        <TextField fx:id="finalValue" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="90.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -56,15 +58,34 @@
                               <Insets left="20.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Label text="Equation" GridPane.rowIndex="2" />
-                        <TextField maxWidth="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="equation">
+                        <Label text="Equation" GridPane.rowIndex="3" />
+                        <TextField fx:id="equation" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="20.0" />
                            </GridPane.margin>
                         </TextField>
+                        <TextField fx:id="accuracy" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Label fx:id="accuracyLabel" layoutX="130.0" layoutY="85.0" text="Accuracy (up to 0.001))" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                  <Button mnemonicParsing="false" text="Calculate" onAction="#calculate" />
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Button fx:id="backButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="31.0" prefWidth="73.0" text="Back">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="calculateButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#calculate" text="Calculate">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
             </children>
