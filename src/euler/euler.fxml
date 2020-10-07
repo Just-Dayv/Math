@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="euler.EulerController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="euler.EulerController">
     <top>
         <Label text="Euler Method" BorderPane.alignment="CENTER" />
     </top>
     <center>
-        <VBox alignment="TOP_CENTER" prefHeight="388.0" prefWidth="600.0" BorderPane.alignment="TOP_CENTER">
+        <VBox alignment="TOP_CENTER" prefHeight="388.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
                 <Label alignment="TOP_CENTER" text="Please specify the constraints">
                     <VBox.margin>
@@ -77,7 +71,7 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                      <children>
-                        <Button mnemonicParsing="false" text="Back" onAction="#goBack">
+                        <Button mnemonicParsing="false" onAction="#goBack" text="Back">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin></Button>
@@ -89,6 +83,15 @@
                   </HBox>
                     </children>
                 </VBox>
+                <Label fx:id="inputError" prefHeight="94.0" prefWidth="483.0" />
+                <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="326.0" prefWidth="800.0">
+                    <children>
+                        <Label alignment="TOP_LEFT" layoutY="-21.0" prefHeight="448.0" prefWidth="857.0" text="     Format Help&#10;     Addition: +&#10;     subtraaction : - &#10;     multiplication : *&#10;      Division: /&#10;Trigonometry:&#10;    sin(x), cos(x), tan(x)... e.t.c&#10; Natural log: ln()&#10; Exponential: e^x&#10;&#10;      Example:&#10;Given a differential eqn  wheere dy/dx + 2y = 1.3e^-x.  where  y= 5 at x = 0.&#10;In order to find the value of y at a certain value of x say 3: &#10;Enter the initial value of y which is 5, at x = 0&#10;Next, since the initial value of x is 0, enter just the final value of x, that is x= 3. &#10;Set your step size to increment the value of x e.g  0.5&#10;Finally from the information provided, we make dy/dx the SOF: dy/dx = 1.3e^-x-2y&#10;In order to enter your equation, Enter dy/dx as a function f(x,y). That is:  f(x,y) =  1.3*(e^-x) -2*y &#10;Add brackets when writing functions to impose BODMAS so your function doesn't throw any errors or miscalculation ">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+                    </children>
+                </AnchorPane>
             </children>
         </VBox>
     </center>

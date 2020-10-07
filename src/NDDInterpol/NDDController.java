@@ -4,9 +4,14 @@ import homepage.Main;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -28,9 +33,16 @@ public class NDDController {
 
     Pattern validEditingState = Pattern.compile("-?(([1-9][0-9]*)|0)?(\\.[0-9]{0,4})?");
 
+    @FXML
+    private Label errorLabel;
+
     public void initialize(){
 
+        Insets insets = new Insets(5,8.7,5,8.7);
+        CornerRadii cornerRadii = new CornerRadii(3);
         calculateButton.setDisable(true);
+        BorderStroke borderStroke = new BorderStroke(Color.GRAY,BorderStrokeStyle.SOLID,cornerRadii,BorderWidths.DEFAULT);
+        Border border = new Border(borderStroke);
 
         spinnerValue.valueProperty().addListener(new ChangeListener() {
             @Override
@@ -119,6 +131,23 @@ public class NDDController {
                             calculateButton.setDisable(true);
                     }
 
+                    if (!variableValues.getText().isEmpty()){
+                        if (convArray(getVariables))
+                        {
+                            errorLabel.setText("");
+                            variableValues.setBackground(new Background(new BackgroundFill(Color.WHITE, cornerRadii, null)));
+                            variableValues.setBorder(border);
+
+                        }
+                        else
+                        {
+                            errorLabel.setText("Check that your values are comma separated decimals");
+                            variableValues.setBackground(new Background(new BackgroundFill(Color.RED, cornerRadii, null)));
+                            variableValues.setBorder(border);
+                            calculateButton.setDisable(true);
+                        }
+                    }
+
                     if (!solutions.getText().isEmpty()&& spinnerVal== getSolutions.length){
                         if (convArray(getVariables))
                             if (spinnerVal== getVariables.length &&convArray(getVariables)&& validateInBetween(getVariables,interpolValue))
@@ -138,6 +167,24 @@ public class NDDController {
                         else
                             calculateButton.setDisable(true);
 
+                    else calculateButton.setDisable(true);
+
+                    if (!interpol.getText().isEmpty())
+                    {
+                        if ( validateInBetween(getVariables,interpolValue) )
+                        {
+                            interpol.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+                            errorLabel.setText("");
+
+                            //calculateButton.setDisable(false);
+                        }
+                        else
+                        {
+                            interpol.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
+                            errorLabel.setText("Check that the value is within the range of values specified");
+                            calculateButton.setDisable(true);
+                        }
+                    }
                     else calculateButton.setDisable(true);
 
                 }
@@ -196,18 +243,40 @@ public class NDDController {
                     if (!interpol.getText().isEmpty())
                         if (spinnerVal== getSolutions.length && spinnerVal== getVariables.length&&
                                 convArray(getSolutions)&&convArray(getVariables)&& validateInBetween(getVariables,interpolValue) )
+                        {
                             calculateButton.setDisable(false);
+                        }
                         else
+                        {
                             calculateButton.setDisable(true);
+                        }
 
+                    else calculateButton.setDisable(true);
+
+                    if (!interpol.getText().isEmpty())
+                    {
+                        if ( validateInBetween(getVariables,interpolValue) )
+                        {
+                            interpol.setBackground(new Background(new BackgroundFill(Color.WHITE, cornerRadii, null)));
+                            errorLabel.setText("");
+                            interpol.setBorder(border);
+
+                            //calculateButton.setDisable(false);
+                        }
+                        else
+                        {
+                            interpol.setBackground(new Background(new BackgroundFill(Color.RED, cornerRadii, null)));
+                            errorLabel.setText("Check that the value is within the range of values specified");
+                            interpol.setBorder(border);
+                            calculateButton.setDisable(true);
+                        }
+                    }
                     else calculateButton.setDisable(true);
 
                 }
                 catch (Exception e){
                     calculateButton.setDisable(true);
                 }
-
-
 
             }
         });
@@ -223,31 +292,61 @@ public class NDDController {
                     {
                         getVariables = variableValues.getText().split(",");
                     }
-                    if (!solutions.getText().isEmpty())
+                    if (!solutions.getText().isEmpty()) {
                         getSolutions = solutions.getText().split(",");
-                    if (!interpol.getText().isEmpty())
+                    }
+                    if (!interpol.getText().isEmpty()) {
                         interpolValue = Double.parseDouble(interpol.getText());
+                    }
 
                     if (!variableValues.getText().isEmpty()&& spinnerVal== getVariables.length){
-                        if (convArray(getVariables))
-                            if (spinnerVal== getSolutions.length &&convArray(getSolutions)&& validateInBetween(getVariables,interpolValue))
-                                calculateButton.setDisable(false);
-                            else
-                                calculateButton.setDisable(true);
+                        if (convArray(getVariables)) {
 
-                        else
+                            calculateButton.setDisable(false);
+                        }
+                        else {
                             calculateButton.setDisable(true);
+                        }
+                        if (spinnerVal== getSolutions.length &&convArray(getSolutions)&& validateInBetween(getVariables,interpolValue)) {
+                        }
+
+                        else {
+                            calculateButton.setDisable(true);
+                        }
                     }
 
                     if (!solutions.getText().isEmpty()&& spinnerVal== getSolutions.length){
-                        if (convArray(getVariables))
-                            if (spinnerVal== getVariables.length &&convArray(getVariables)&& validateInBetween(getVariables,interpolValue))
-                                calculateButton.setDisable(false);
-                            else
-                                calculateButton.setDisable(true);
+                        if (convArray(getVariables)) {
 
-                        else
+                            calculateButton.setDisable(false);
+                        }
+                        else {
                             calculateButton.setDisable(true);
+                        }
+                        if (spinnerVal== getVariables.length &&convArray(getVariables)&& validateInBetween(getVariables,interpolValue)) {
+                        }
+
+                        else {
+                            calculateButton.setDisable(true);
+                        }
+                    }
+
+
+                    if (!solutions.getText().isEmpty()){
+                        if (convArray(getSolutions))
+                        {
+                            errorLabel.setText("");
+                            solutions.setBackground(new Background(new BackgroundFill(Color.WHITE, cornerRadii, null)));
+                            solutions.setBorder(border);
+
+                        }
+                        else
+                        {
+                            errorLabel.setText("Check that your values are comma separated decimals");
+                            solutions.setBackground(new Background(new BackgroundFill(Color.RED, cornerRadii, null)));
+                            solutions.setBorder(border);
+                            calculateButton.setDisable(true);
+                        }
                     }
 
 
@@ -268,9 +367,6 @@ public class NDDController {
             }
 
         });
-
-
-
     }
     public boolean convArray(String[] array){
         double[] arr = new double[array.length];
@@ -295,6 +391,7 @@ public class NDDController {
             }
 
             Arrays.sort(array);
+
             if (a> array[0] && a < array[array.length-1])
                 return true;
             else{
@@ -312,6 +409,7 @@ public class NDDController {
     private String output;
     public void calculate(){
 
+        output+="\\\\";
         output = "\\begin{array}{l}";
         String [] variableVals = this.variableValues.getText().split(",");
         String [] solutionString = this.solutions.getText().split(",");
@@ -324,7 +422,6 @@ public class NDDController {
         double interpol = Double.parseDouble(this.interpol.getText());
         int degree = variableVals.length;
         double [] constVal = Arrays.copyOf(solutions,degree);
-        output+="\\\\";
         output+="For\\hspace{0.4cm} first\\hspace{0.4cm} difference :\\\\";
         output+= String.format("b_0 = %.4f\\\\",constVal[0]);
         for (int  i  = 1; i < degree; i++ ){
@@ -365,7 +462,9 @@ public class NDDController {
         output+= String.format("f(x) = %.4f\\\\",finalAnswer);
         output+= "\\end{array}";
         Main.output.set(output);
-        Main.window.setScene(Main.outputScene);
+        Stage stage = new Stage();
+        stage.setScene(Main.outputScene);
+        stage.show();
 
     }
 

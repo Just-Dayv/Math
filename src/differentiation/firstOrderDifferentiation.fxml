@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="differentiation.FirstOrderDifferentiationController">
+    <top>
+        <Label text="Numerical Differentiation First Order" BorderPane.alignment="CENTER" />
+    </top>
+    <center>
+        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" prefHeight="255.0" prefWidth="600.0">
+                    <children>
+                  <Label text="Please specify the constraints" />
+                        <GridPane prefHeight="174.0" prefWidth="600.0">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="357.0" minWidth="10.0" prefWidth="252.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="515.0" minWidth="10.0" prefWidth="348.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <VBox.margin>
+                                <Insets top="40.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label text="X Value" />
+                                <TextField fx:id="initialValue" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="90.0" GridPane.columnIndex="1">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                    <GridPane.margin>
+                                        <Insets left="20.0" />
+                                    </GridPane.margin>
+                                </TextField>
+                                <Label text="function" GridPane.rowIndex="2" />
+                                <TextField fx:id="equation" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <GridPane.margin>
+                                        <Insets left="20.0" />
+                                    </GridPane.margin>
+                                </TextField>
+                                <TextField fx:id="stepSize" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <GridPane.margin>
+                                        <Insets left="20.0" />
+                                    </GridPane.margin>
+                                </TextField>
+                                <Label fx:id="accuracyLabel" layoutX="130.0" layoutY="85.0" text="Step size" GridPane.rowIndex="1" />
+                            </children>
+                        </GridPane>
+                        <HBox alignment="CENTER">
+                            <children>
+                                <Button fx:id="backButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="31.0" prefWidth="73.0" text="Back">
+                                    <HBox.margin>
+                                        <Insets right="10.0" />
+                                    </HBox.margin>
+                                </Button>
+                                <Button fx:id="calculateButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#calculate" text="Calculate">
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <Label fx:id="errorLabel" prefHeight="89.0" prefWidth="468.0" />
+                <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="800.0">
+                    <children>
+                        <Label layoutY="1.0" prefHeight="440.0" prefWidth="816.0" text=" Format Help&#10;     Addition: +&#10;     subtraaction : - &#10;     multiplication : *&#10;      Division: /&#10;Trigonometry:&#10;     sin(x), cos(x), tan(x)... e.t.c&#10;Natural log: ln()&#10;Exponential: e^x&#10;&#10;      Example:&#10;Given a function f(x) = 2000ln(14 *(10^4)/(14*10^4 -2100x))&#10;In order to find the value of the differential f'(x) using divided differences at a certain value of x say 16&#10;&#10;Enter the x value, that is 16;&#10;Enter the step size (delta x) that will be used to calculate the differences e.g let's say change in x = 2&#10;Enter the function f(x) such that f(x) = 2000* ln (14* (10^4)/(14*(10^4)-2100*x))&#10;Use brackets in your function to impose BODMAS ">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+    </center>
+
+
+</BorderPane>

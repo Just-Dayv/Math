@@ -34,6 +34,8 @@
                                 <String fx:value="Nonlinear Methods" />
                                 <String fx:value="System of Equations" />
                                 <String fx:value="Interpolation"/>
+                                <String fx:value="Numerical Integration"/>
+                                <String fx:value="Numerical Differentiation"/>
                             </FXCollections>
                         </items>
 

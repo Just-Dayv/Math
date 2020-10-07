@@ -1,13 +1,12 @@
 package gaussian;
 
 import homepage.Main;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class GaussianController {
@@ -22,15 +21,21 @@ public class GaussianController {
     @FXML
     private TextField solutions;
 
+    @FXML
+    private Label errorLabel;
+
     private String output;
 
     private static final double EPSILON = 1e-8;
 
     @FXML
-    private VBox vbox;
-
-    @FXML
     public void initialize() {
+
+        CornerRadii cornerRadii = new CornerRadii(3);
+        calculateButton.setDisable(true);
+        BorderStroke borderStroke = new BorderStroke(Color.GRAY,BorderStrokeStyle.SOLID,cornerRadii,BorderWidths.DEFAULT);
+        Border border = new Border(borderStroke);
+
         calculateButton.setDisable(true);
 
 
@@ -63,87 +68,167 @@ public class GaussianController {
                     calculateButton.setDisable(true);
                 }
 
+                    if ((eqnVar.length==initValue)&&(totalValues == initValue*initValue)) {
+                        errorLabel.setText("");
+                        equationArea.setBackground(new Background(new BackgroundFill(Color.WHITE, cornerRadii, null)));
+                        equationArea.setBorder(border);
+                        //calculateButton.setDisable(false);
+                    }
+                    else{
+                        errorLabel.setText("Check that you have defined the matrix properly into row and columns\nusing the comma and semicolon appropriately  ");
+                        equationArea.setBackground(new Background(new BackgroundFill(Color.RED, cornerRadii, null)));
+                        equationArea.setBorder(border);
+                        calculateButton.setDisable(true);
+                    }
+
             }
                 catch (Exception e){
+                    errorLabel.setText("Check that you have defined the matrix properly into row and columns\nusing the comma and semicolon appropriately  ");
+                    equationArea.setBackground(new Background(new BackgroundFill(Color.RED, cornerRadii, null)));
+                    equationArea.setBorder(border);
                     calculateButton.setDisable(true);
                 }
             }
         });
 
-        equationArea.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            equationArea.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                try{
-                    int initValue = (int)(variables.getValue());
-                    String [] eqnVar =  equationArea.getText().split(";");
-                    String [][] equations =  new String[eqnVar.length][];
-                    double [][] eqnMatrix = new double[equations.length][];
-                    int totalValues=0;
-                    for(int i = 0; i < eqnMatrix.length; i++)
-                    {
-                        equations[i]= eqnVar[i].split(",");
-                        eqnMatrix[i]= new double[equations[i].length];
-                        for (int j=0; j < eqnMatrix[i].length; j++)
+                    try{
+                        int initValue = (int)(variables.getValue());
+                        String [] eqnVar =  equationArea.getText().split(";");
+                        String [][] equations =  new String[eqnVar.length][];
+                        double [][] eqnMatrix = new double[equations.length][];
+                        int totalValues=0;
+                        for(int i = 0; i < eqnMatrix.length; i++)
                         {
+                            equations[i]= eqnVar[i].split(",");
+                            eqnMatrix[i]= new double[equations[i].length];
+                            for (int j=0; j < eqnMatrix[i].length; j++)
+                            {
 
-                            eqnMatrix[i][j] = Double.parseDouble(equations[i][j]);
-                            totalValues+=1;
+                                eqnMatrix[i][j] = Double.parseDouble(equations[i][j]);
+                                totalValues+=1;
 
+                            }
                         }
+                        if((eqnVar.length==initValue)&&(totalValues == initValue*initValue) && matrixDeterminant(eqnMatrix)!=0 &&(solutions.getText().split(",").length== equations.length) )
+                        {
+                            calculateButton.setDisable(false);
+                        }
+                        else {
+                            calculateButton.setDisable(true);
+                        }
+
+
+                        if ((eqnVar.length==initValue)&&(totalValues == initValue*initValue)) {
+                                errorLabel.setText("");
+                                equationArea.setBackground(new Background(new BackgroundFill(Color.WHITE, cornerRadii, null)));
+                                equationArea.setBorder(border);
+                                //calculateButton.setDisable(false);
+                            }
+                        else{
+                            errorLabel.setText("Check that you have defined the matrix properly into row and columns\nusing the comma and semicolon appropriately  ");
+                            equationArea.setBackground(new Background(new BackgroundFill(Color.RED, cornerRadii, null)));
+                            equationArea.setBorder(border);
+                            calculateButton.setDisable(true);
+                        }
+
+                        if (matrixDeterminant(eqnMatrix)!=0) {
+                            errorLabel.setText("");
+                            equationArea.setBackground(new Background(new BackgroundFill(Color.WHITE, cornerRadii, null)));
+                            equationArea.setBorder(border);
+                            //calculateButton.setDisable(false);
+                        }
+                        else{
+                            errorLabel.setText("Check that your matrix does not have a determinant of zero   ");
+                            equationArea.setBackground(new Background(new BackgroundFill(Color.RED, cornerRadii, null)));
+                            equationArea.setBorder(border);
+                            calculateButton.setDisable(true);
+                        }
+
+
                     }
-                    if((eqnVar.length==initValue)&&(totalValues == initValue*initValue) && matrixDeterminant(eqnMatrix)!=0 &&(solutions.getText().split(",").length== equations.length) )
-                    {
-                        calculateButton.setDisable(false);
-                    }
-                    else {
+                    catch (Exception e){
+                        errorLabel.setText("Check that you have defined the matrix properly into row and columns\nusing the comma and semicolon appropriately  ");
+                        equationArea.setBackground(new Background(new BackgroundFill(Color.RED, cornerRadii, null)));
+                        equationArea.setBorder(border);
                         calculateButton.setDisable(true);
                     }
 
                 }
-                catch (Exception e){
-                    calculateButton.setDisable(true);
-                }
-
-            }
-        });
-        solutions.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                try{
-                    int initValue = (int)(variables.getValue());
-                    String [] eqnVar =  equationArea.getText().split(";");
-                    String [][] equations =  new String[eqnVar.length][];
-                    double [][] eqnMatrix = new double[equations.length][];
-                    int totalValues=0;
-                    for(int i = 0; i < eqnMatrix.length; i++)
-                    {
-                        equations[i]= eqnVar[i].split(",");
-                        eqnMatrix[i]= new double[equations[i].length];
-                        for (int j=0; j < eqnMatrix[i].length; j++)
+            });
+            solutions.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    try{
+                        int initValue = (int)(variables.getValue());
+                        String [] eqnVar =  equationArea.getText().split(";");
+                        String [][] equations =  new String[eqnVar.length][];
+                        double [][] eqnMatrix = new double[equations.length][];
+                        int totalValues=0;
+                        for(int i = 0; i < eqnMatrix.length; i++)
                         {
+                            equations[i]= eqnVar[i].split(",");
+                            eqnMatrix[i]= new double[equations[i].length];
+                            for (int j=0; j < eqnMatrix[i].length; j++)
+                            {
 
-                            eqnMatrix[i][j] = Double.parseDouble(equations[i][j]);
-                            totalValues+=1;
+                                eqnMatrix[i][j] = Double.parseDouble(equations[i][j]);
+                                totalValues+=1;
 
+                            }
                         }
+                        if((eqnVar.length==initValue)&&(totalValues == initValue*initValue) && matrixDeterminant(eqnMatrix)!=0 &&(solutions.getText().split(",").length== equations.length) )
+                        {
+                            calculateButton.setDisable(false);
+                        }
+                        else {
+                            calculateButton.setDisable(true);
+                        }
+
+                        if (!solutions.getText().isEmpty()){
+                            if (convArray(solutions.getText().split(",")))
+                            {
+                                errorLabel.setText("");
+                                solutions.setBackground(new Background(new BackgroundFill(Color.WHITE, cornerRadii, null)));
+                                solutions.setBorder(border);
+
+                            }
+                            else
+                            {
+                                errorLabel.setText("Check that your values are comma separated decimals");
+                                solutions.setBackground(new Background(new BackgroundFill(Color.RED, cornerRadii, null)));
+                                solutions.setBorder(border);
+                                calculateButton.setDisable(true);
+                            }
+                        }
+
+                        if ((eqnVar.length==initValue)&&(totalValues == initValue*initValue)) {
+                            errorLabel.setText("");
+                            equationArea.setBackground(new Background(new BackgroundFill(Color.WHITE, cornerRadii, null)));
+                            equationArea.setBorder(border);
+                            //calculateButton.setDisable(false);
+                        }
+                        else{
+                            errorLabel.setText("Check that you have defined the matrix properly into row and columns\nusing the comma and semicolon appropriately  ");
+                            equationArea.setBackground(new Background(new BackgroundFill(Color.RED, cornerRadii, null)));
+                            equationArea.setBorder(border);
+                            calculateButton.setDisable(true);
+                        }
+
                     }
-                    if((eqnVar.length==initValue)&&(totalValues == initValue*initValue) && matrixDeterminant(eqnMatrix)!=0 &&(solutions.getText().split(",").length== equations.length) )
-                    {
-                        calculateButton.setDisable(false);
-                    }
-                    else {
+                    catch (Exception e){
+                        errorLabel.setText("Check that your values are comma separated decimals");
+                        solutions.setBackground(new Background(new BackgroundFill(Color.RED, cornerRadii, null)));
+                        solutions.setBorder(border);
                         calculateButton.setDisable(true);
                     }
 
                 }
-                catch (Exception e){
-                    calculateButton.setDisable(true);
-                }
-
-            }
-        });
-    }
+            });
+        }
 
     public void calculate() {
 
@@ -156,16 +241,16 @@ public class GaussianController {
         double [] solMatrix = new double[solnString.length];
         double [][] augmntdMatrix = new double[initValue][initValue+1];
 
-        for(int i = 0; i < initValue; i++)
-        {
-            equations[i]= eqnVar[i].split(",");
-            for (int j=0; j < initValue; j++)
+            for(int i = 0; i < initValue; i++)
             {
-                augmntdMatrix[i][j] = Double.parseDouble(equations[i][j]);
-                eqnMatrix[i][j] = Double.parseDouble(equations[i][j]);
+                equations[i]= eqnVar[i].split(",");
+                for (int j=0; j < initValue; j++)
+                {
+                    augmntdMatrix[i][j] = Double.parseDouble(equations[i][j]);
+                    eqnMatrix[i][j] = Double.parseDouble(equations[i][j]);
 
+                }
             }
-        }
         printMatrix(eqnMatrix);
         printVarMatrix(initValue);
         output+="=";
@@ -228,7 +313,7 @@ public class GaussianController {
             }
             if (Math.abs(augmntdMatrix[i][i]) > EPSILON){
                 x[i] = (augmntdMatrix[i][initValue] - sum) / augmntdMatrix[i][i];
-                output+= String.format("x_{%d} = \\frac{%.2f-%.2f}{%.2f}= %.4f\\\\",i+1,augmntdMatrix[i][initValue],sum,augmntdMatrix[i][i],x[i]);
+                output+= String.format("x_{%d} = \\frac{%.5f-%.5f}{%.2f}= %.5f\\\\",i+1,augmntdMatrix[i][initValue],sum,augmntdMatrix[i][i],x[i]);
             }
             else if (Math.abs(augmntdMatrix[i][initValue] - sum) > EPSILON)
             {
@@ -241,8 +326,22 @@ public class GaussianController {
         Stage stage = new Stage();
         stage.setScene(Main.outputScene);
         stage.show();
-        vbox.getChildren().remove(vbox.getChildren().size()-1);
 
+
+    }
+
+    public boolean convArray(String[] array){
+        double[] arr = new double[array.length];
+        try {
+            for (int i = 0; i < arr.length; i++){
+                arr[i] = Double.parseDouble(array[i]);
+            }
+            return true;
+        }
+        catch (Exception e ){
+            calculateButton.setDisable(true);
+            return false;
+        }
     }
 
     private double[][] pivot(int p, double [][] a) {
@@ -293,9 +392,9 @@ public class GaussianController {
             for (int j = 0; j< matrix[i].length; j++)
             {
                 if(j< matrix[i].length-1)
-                output+= String.format("%.3f&",matrix[i][j]);
+                output+= String.format("%.5f&",matrix[i][j]);
                 else
-                    output+= String.format("%.3f",matrix[i][j]);
+                    output+= String.format("%.5f",matrix[i][j]);
             }
             output+="\\\\";
         }
@@ -309,9 +408,9 @@ public class GaussianController {
             for (int j = 0; j< matrix[i].length; j++)
             {
                 if(j< matrix[i].length-1)
-                    output+= String.format("%.3f&",matrix[i][j]);
+                    output+= String.format("%.5f&",matrix[i][j]);
                 else
-                    output+= String.format("\\vdots&%.3f",matrix[i][j]);
+                    output+= String.format("\\vdots&%.5f",matrix[i][j]);
             }
             output+="\\\\";
         }
@@ -322,7 +421,7 @@ public class GaussianController {
         output+="\\begin{pmatrix}";
         for (int i = 0; i < matrix.length; i++)
         {
-            output+=String.format("%.3f\\\\",matrix[i]);
+            output+=String.format("%.5f\\\\",matrix[i]);
         }
         output+="\\end{pmatrix}";
     }

@@ -28,9 +28,12 @@ public class Controller {
         proceedButton.setDisable(true);
         //set category map
         categoryMap.put("ODE", new String[]{"Euler", "Rk2 Midpoint", "Rk2 Heun", "Rk2 Ralston", "Rk3", "Rk4"});
-        categoryMap.put("Nonlinear Methods", new String[]{"Bisection", "NewtonRaphson", "Secant"});
-        categoryMap.put("Interpolation", new String[]{"Lagrangian Interpolation", "NDD"});
-        categoryMap.put("System of Equations", new String[]{"Gaussian Elimination"});
+        categoryMap.put("Nonlinear Methods", new String[]{"Bisection", "NewtonRaphson", "Secant", "False Position"});
+        categoryMap.put("Interpolation", new String[]{"Lagrangian Interpolation", "Newton Divided Difference","Direct Interpolation","Quadratic Spline","Improved Quadratic Spline","Cubic Spline"});
+        categoryMap.put("Numerical Integration", new String[]{"Trapezoidal Integration","Simpson 1/3 Rule","Simpson 3/8 Rule"});
+        categoryMap.put("System of Equations", new String[]{"Gaussian Elimination", "LU Decomposition", "Inverse with LU Decomposition",
+        "Gauss Seidel"});
+        categoryMap.put("Numerical Differentiation",new String[]{"First Order Divided Differences"});
 
 
         methods.setItems(observableArrayList);
@@ -48,6 +51,12 @@ public class Controller {
                                                 }
                                             }
         );
+          categories.valueProperty().addListener(new ChangeListener() {
+              @Override
+              public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                  proceedButton.setDisable(true);
+              }
+          });
     }
 
     public void proceed() {
@@ -55,7 +64,7 @@ public class Controller {
         System.out.println(methodName);
         Scene s = Main.sceneMap.get(methodName);
         Main.window.setScene(s);
-        proceedButton.setDisable(true);
+        Main.window.resizableProperty().setValue(false);
     }
 
 

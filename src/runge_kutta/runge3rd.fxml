@@ -3,10 +3,9 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="runge_kutta.RK3Controller"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="850.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="runge_kutta.RK3Controller">
     <top>
         <Label text="RK3 " BorderPane.alignment="CENTER" />
     </top>
@@ -18,7 +17,7 @@
                         <Insets top="20.0" />
                     </VBox.margin>
                 </Label>
-                <VBox alignment="CENTER" prefHeight="293.0" prefWidth="600.0" fx:id="vbox">
+                <VBox alignment="CENTER" prefHeight="293.0" prefWidth="600.0">
                     <children>
                         <GridPane prefHeight="158.0" prefWidth="600.0">
                             <columnConstraints>
@@ -82,6 +81,15 @@
                         </HBox>
                     </children>
                 </VBox>
+                <Label fx:id="inputError" prefHeight="94.0" prefWidth="483.0" />
+                <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="326.0" prefWidth="800.0">
+                    <children>
+                        <Label alignment="TOP_LEFT" layoutY="-28.0" prefHeight="444.0" prefWidth="819.0" text="     Format Help&#10;     Addition: +&#10;     subtraaction : - &#10;     multiplication : *&#10;      Division: /&#10;Trigonometry:&#10;    sin(x), cos(x), tan(x)... e.t.c&#10; Natural log: ln()&#10; Exponential: e^x&#10;&#10;      Example:&#10;Given a differential eqn  wheere dy/dx + 2y = 1.3e^-x.  where  y= 5 at x = 0.&#10;In order to find the value of y at a certain value of x say 3: &#10;Enter the initial value of y which is 5, at x = 0&#10;Next, since the initial value of x is 0, enter just the final value of x, that is x= 3. &#10;Set your step size to increment the value of x e.g  0.5&#10;Finally from the information provided, we make dy/dx the SOF: dy/dx = 1.3e^-x-2y&#10;In order to enter your equation, Enter dy/dx as a function f(x,y). That is:  f(x,y) =  1.3*(e^-x) -2*y &#10;Add brackets when writing functions to impose BODMAS so your function doesn't throw any errors or miscalculation ">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+                    </children>
+                </AnchorPane>
             </children>
         </VBox>
     </center>

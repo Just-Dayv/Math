@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="newton.AppliedRaphsonController"
+            prefHeight="400.0" prefWidth="600.0">
+
+
+    <top>
+        <Label text="Newton Raphson Method" BorderPane.alignment="CENTER" />
+    </top>
+    <center>
+        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="TOP_CENTER" text="Please specify the constraints">
+                    <VBox.margin>
+                        <Insets top="70.0" />
+                    </VBox.margin>
+                </Label>
+                <VBox alignment="CENTER" prefHeight="255.0" prefWidth="600.0">
+                    <children>
+                        <GridPane prefHeight="174.0" prefWidth="600.0">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="357.0" minWidth="10.0" prefWidth="252.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="515.0" minWidth="10.0" prefWidth="348.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <VBox.margin>
+                                <Insets top="40.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label text="Initial Value" />
+                                <TextField fx:id="initialValue" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="90.0" GridPane.columnIndex="1">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                    <GridPane.margin>
+                                        <Insets left="20.0" />
+                                    </GridPane.margin>
+                                </TextField>
+                                <Label text="Equation (without f(x))" GridPane.rowIndex="2" />
+                                <TextField fx:id="equation" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <GridPane.margin>
+                                        <Insets left="20.0" />
+                                    </GridPane.margin>
+                                </TextField>
+                                <TextField fx:id="accuracy" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <GridPane.margin>
+                                        <Insets left="20.0" />
+                                    </GridPane.margin>
+                                </TextField>
+                                <Label fx:id="accuracyLabel" layoutX="130.0" layoutY="85.0" text="Accuracy (up to 0.001))" GridPane.rowIndex="1" />
+                            </children>
+                        </GridPane>
+                        <HBox alignment="CENTER">
+                            <children>
+                                <Button fx:id="backButton" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goBack" prefHeight="31.0" prefWidth="73.0" text="Back">
+                                    <HBox.margin>
+                                        <Insets right="10.0" />
+                                    </HBox.margin>
+                                </Button>
+                                <Button fx:id="calculateButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#calculate" text="Calculate">
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </center>
+
+
+</BorderPane>

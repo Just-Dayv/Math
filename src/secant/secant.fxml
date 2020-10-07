@@ -1,31 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="secant.SecantController">
+<BorderPane prefHeight="850.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="secant.SecantController">
     <top>
         <Label text="Secant Method" BorderPane.alignment="CENTER" />
     </top>
     <center>
         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
-                <Label alignment="TOP_CENTER" text="Please specify the constraints">
-                    <VBox.margin>
-                        <Insets top="70.0" />
-                    </VBox.margin>
-                </Label>
                 <VBox alignment="CENTER" prefHeight="255.0" prefWidth="600.0">
                     <children>
-                        <GridPane prefHeight="174.0" prefWidth="600.0">
+                  <Label text="Please specify the constraints" />
+                        <GridPane prefHeight="248.0" prefWidth="800.0">
                             <columnConstraints>
                                 <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="357.0" minWidth="10.0" prefWidth="252.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="515.0" minWidth="10.0" prefWidth="348.0" />
@@ -37,7 +27,7 @@
                                 <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <VBox.margin>
-                                <Insets top="40.0" />
+                                <Insets left="70.0" top="40.0" />
                             </VBox.margin>
                             <children>
                                 <Label text="Initial Value" />
@@ -58,7 +48,7 @@
                                         <Insets left="20.0" />
                                     </GridPane.margin>
                                 </TextField>
-                                <Label text="Equation" GridPane.rowIndex="3" />
+                                <Label text="function" GridPane.rowIndex="3" />
                                 <TextField fx:id="equation" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                     <GridPane.margin>
                                         <Insets left="20.0" />
@@ -69,21 +59,30 @@
                                         <Insets left="20.0" />
                                     </GridPane.margin>
                                 </TextField>
-                                <Label layoutX="130.0" layoutY="85.0" text="Accuracy (up to 0.001))" GridPane.rowIndex="1" />
+                                <Label layoutX="130.0" layoutY="85.0" text="Relative error(epsilon) (up to 0.0001))" GridPane.rowIndex="1" />
                             </children>
                         </GridPane>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <Button mnemonicParsing="false" text="Back" onAction="#goBack"/>
-                              <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#calculate" text="Calculate">
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
                     </children>
                 </VBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goBack" text="Back" />
+                        <Button fx:id="calculateButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#calculate" text="Calculate">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+                <Label fx:id="errorLabel" prefHeight="50.0" prefWidth="427.0" />
+                <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="331.0" prefWidth="800.0">
+                    <children>
+                        <Label layoutY="1.0" prefHeight="489.0" prefWidth="975.0" text="     Format Help&#10;     Addition: +&#10;     subtraaction : - &#10;     multiplication : *&#10;      Division: /&#10;&#10;     Trigonometry:&#10;sin(x), cos(x), tan(x)... e.t.c&#10;&#10;     Natural log: ln()&#10;    Exponential: e^x&#10;&#10;      Example:&#10;Provided with an eqn such as: &#10;x^3 - 0.165x^2 +3.993*10^-4=0&#10;In order to find a root of this eqn via Secant Method&#10;Enter your first guess value x0, e.g 0.02. &#10;Next, enter the percentage error that serves as a stopping criteria for your number of iterations to perfect the value of your root (Max is 0.001)&#10;Then enter your second guess value x2 e.g 0.05.&#10;Finally, enter your function f(x) which will be used to find f(x1) and f(x2), that is: f(x) = x^3 - 0.165*(x^2) + 3.993*(10^-4)&#10;Add brackets when writing functions to impose BODMAS ">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+                    </children>
+                </AnchorPane>
             </children>
         </VBox>
     </center>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="850.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="integration.TrapezoidalController">
+
+    <top>
+        <Label text="Trapezoidal Method" BorderPane.alignment="CENTER" />
+    </top>
+    <center>
+        <VBox alignment="TOP_CENTER" prefHeight="388.0" prefWidth="600.0" BorderPane.alignment="TOP_CENTER">
+            <children>
+                <Label alignment="TOP_CENTER" text="Please specify the constraints">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Label>
+                <VBox alignment="CENTER" prefHeight="293.0" prefWidth="600.0">
+                    <children>
+                        <GridPane prefHeight="158.0" prefWidth="600.0">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="357.0" minWidth="10.0" prefWidth="252.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="515.0" minWidth="10.0" prefWidth="348.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="66.0" minHeight="4.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="41.0" minHeight="0.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                            <children>
+                                <Label text="Lower boundary value" />
+                                <TextField fx:id="lowerVal" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="90.0" GridPane.columnIndex="1">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                    <GridPane.margin>
+                                        <Insets left="20.0" />
+                                    </GridPane.margin>
+                                </TextField>
+                                <Label text="Upper boundary value" GridPane.rowIndex="1" />
+                                <TextField fx:id="upperVal" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="90.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                    <GridPane.margin>
+                                        <Insets left="20.0" />
+                                    </GridPane.margin>
+                                </TextField>
+                                <Label text="function to be integrated" GridPane.rowIndex="3" />
+                                <TextField fx:id="equation" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="313.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <GridPane.margin>
+                                        <Insets left="20.0" />
+                                    </GridPane.margin>
+                                </TextField>
+                                <Label text="No. of segments" GridPane.rowIndex="2" />
+                                <TextField fx:id="segments" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="93.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <GridPane.margin>
+                                        <Insets left="20.0" />
+                                    </GridPane.margin></TextField>
+                            </children>
+                        </GridPane>
+                        <HBox alignment="CENTER">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#goBack" text="Back">
+                                    <HBox.margin>
+                                        <Insets right="20.0" />
+                                    </HBox.margin></Button>
+                                <Button fx:id="calculateButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#calculate" text="Calculate">
+                                    <HBox.margin>
+                                        <Insets left="20.0" />
+                                    </HBox.margin></Button>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <AnchorPane>
+                    <children>
+                        <Label layoutY="85.0" prefHeight="384.0" prefWidth="693.0" text="     Format Help&#10;     Addition: +&#10;     subtraaction : - &#10;     multiplication : *&#10;      Division: /&#10;&#10;     Trigonometry:&#10;sin(x), cos(x), tan(x)... e.t.c&#10;&#10;     Natural log: ln()&#10;    Exponential: e^x&#10;&#10;      Example:&#10;Given a function a function f(x) = 2000 ln(14000/(14000-2100x)) -9.8x  from x = 8 to x =30&#10;Using trapezoid method, enter the boundary values accordingly i.e, 8 and upper boundary 30&#10;Enter the number of segments for integration. e.g 5&#10;Enter the function f(x) to be integrated i.e f(x) = 2000*ln (14000/(14000-2100*x)) -9.8*x&#10;Add brackets when writing to impose BODMAS ">
+                            <font>
+                                <Font size="15.0" />
+                            </font></Label>
+                        <Label fx:id="errorLabel" layoutX="210.0" prefHeight="74.0" prefWidth="426.0" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>
