@@ -234,11 +234,11 @@ public class BisectionController {
         double finValue = Double.parseDouble(finalValue.getText());
 
 
-        output+=String.format("x_l = %.4f\\\\",initValue);
-        output+=String.format("x_u = %.4f\\\\",finValue);
-        output += String.format("f(%.5f)\\hspace{0.4cm}  = \\hspace{0.4cm} %.5f\\\\", initValue, function.calculate(initValue));
-        output += String.format("f(%.5f)\\hspace{0.4cm}  = \\hspace{0.4cm} %.5f\\\\", finValue, function.calculate(finValue));
-        output += String.format("f(%.5f)*f(%.5f) = \\hspace{0.4cm} %.13f\\hspace{0.4cm}which \\hspace{0.4cm}is \\hspace{0.4cm} < 0\\\\", initValue, finValue, (function.calculate(initValue) * function.calculate(finValue)));
+        output+=String.format("x_l = %.10f\\\\",initValue);
+        output+=String.format("x_u = %.10f\\\\",finValue);
+        output += String.format("f(%.5f)\\hspace{0.4cm}  = \\hspace{0.4cm} %.10f\\\\", initValue, function.calculate(initValue));
+        output += String.format("f(%.5f)\\hspace{0.4cm}  = \\hspace{0.4cm} %.10f\\\\", finValue, function.calculate(finValue));
+        output += String.format("f(%.10f)*f(%.10f) = \\hspace{0.4cm} %.10f\\hspace{0.4cm}which \\hspace{0.4cm}is \\hspace{0.4cm} < 0\\\\", initValue, finValue, (function.calculate(initValue) * function.calculate(finValue)));
 
         double midValue = initValue;
         double oldMidValue = midValue;
@@ -256,9 +256,9 @@ public class BisectionController {
 //                    break;
 //            }
             output+= String.format("For \\hspace{0.4cm} iteration \\hspace{0.4cm} %d:\\\\",iteration);
-            output+= String.format("\\hspace{1.4cm} x_m = \\frac{x_l+x_u}{2} = \\frac{%.4f + %.4f}{2}\\\\",initValue,finValue);
-            output += String.format("\\hspace{1.4cm} mid value\\hspace{0.4cm} = \\hspace{0.4cm} %.5f\\\\", midValue);
-            output += String.format("\\hspace{1.4cm} f(%.5f)\\hspace{0.4cm}  = \\hspace{0.4cm} %.12f\\\\", midValue, function.calculate(midValue));
+            output+= String.format("\\hspace{1.4cm} x_m = \\frac{x_l+x_u}{2} = \\frac{%.10f + %.10f}{2}\\\\",initValue,finValue);
+            output += String.format("\\hspace{1.4cm} mid value\\hspace{0.4cm} = \\hspace{0.4cm} %.10f\\\\", midValue);
+            output += String.format("\\hspace{1.4cm} f(%.10f)\\hspace{0.4cm}  = \\hspace{0.4cm} %.10f\\\\", midValue, function.calculate(midValue));
 
             // iteration+=1;
 
@@ -273,10 +273,10 @@ public class BisectionController {
                     if ((percentError) < epsilon)
                         break;
                 }
-                output += String.format("\\hspace{1.4cm} f(x_m)f(x_u)\\hspace{0.4cm}=\\hspace{0.4cm}f(%.5f)*f(%.5f) = \\hspace{0.4cm}%.18f \\hspace{0.4cm}which \\hspace{0.4cm}is \\hspace{0.4cm} > 0\\\\", midValue, finValue, function.calculate(midValue) * function.calculate(finValue));
+                output += String.format("\\hspace{1.4cm} f(x_m)f(x_u)\\hspace{0.4cm}=\\hspace{0.4cm}f(%.10f)*f(%.10f) = \\hspace{0.4cm}%.10f \\hspace{0.4cm}which \\hspace{0.4cm}is \\hspace{0.4cm} > 0\\\\", midValue, finValue, function.calculate(midValue) * function.calculate(finValue));
                 finValue = midValue;
 
-                output += String.format("\\hspace{1.4cm} f(x_l)f(x_m)\\hspace{0.4cm}=\\hspace{0.4cm}f(%.5f)*f(%.5f) = \\hspace{0.4cm} %.18f\\hspace{0.4cm}which \\hspace{0.4cm}is \\hspace{0.4cm} < 0\\\\", initValue, midValue, (function.calculate(midValue) * function.calculate(initValue)));
+                output += String.format("\\hspace{1.4cm} f(x_l)f(x_m)\\hspace{0.4cm}=\\hspace{0.4cm}f(%.10f)*f(%.10f) = \\hspace{0.4cm} %.10f\\hspace{0.4cm}which \\hspace{0.4cm}is \\hspace{0.4cm} < 0\\\\", initValue, midValue, (function.calculate(midValue) * function.calculate(initValue)));
                 output += String.format("\\hspace{1.4cm} Therefore\\hspace{0.4cm} a \\hspace{0.4cm} solution\\hspace{0.4cm} exists\\hspace{0.4cm}  between \\hspace{0.4cm} %.10f  \\hspace{0.4cm} and\\hspace{0.4cm}  %.10f \\\\", initValue, midValue);
 
                 output += String.format("\\hspace{1.4cm} Testing\\hspace{0.4cm}  with \\hspace{0.4cm} new \\hspace{0.4cm} constraints\\hspace{0.4cm} :\\hspace{0.4cm}  %.10f, \\hspace{0.4cm} %.10f\\\\", initValue, finValue);
@@ -292,10 +292,10 @@ public class BisectionController {
                     if ((percentError) < epsilon)
                         break;
                 }
-                output += String.format("\\hspace{1.4cm}f(x_l)f(x_m)\\hspace{0.4cm} =\\hspace{0.4cm} f(%.5f)*f(%.5f) = \\hspace{0.4cm} %.18f\\hspace{0.4cm}which \\hspace{0.4cm}is \\hspace{0.4cm} > 0\\\\", initValue, midValue, (function.calculate(midValue) * function.calculate(initValue)));
+                output += String.format("\\hspace{1.4cm}f(x_l)f(x_m)\\hspace{0.4cm} =\\hspace{0.4cm} f(%.10f)*f(%.10f) = \\hspace{0.4cm} %.10f\\hspace{0.4cm}which \\hspace{0.4cm}is \\hspace{0.4cm} > 0\\\\", initValue, midValue, (function.calculate(midValue) * function.calculate(initValue)));
                 initValue = midValue;
                // oldMidValue = midValue;
-                output += String.format("\\hspace{1.4cm} f(x_m)f(x_u)\\hspace{0.4cm}=\\hspace{0.4cm}f(%.5f)*f(%.5f) = \\hspace{0.4cm}%.18f \\hspace{0.4cm}which \\hspace{0.4cm}is \\hspace{0.4cm} < 0\\\\", midValue, finValue, function.calculate(midValue) * function.calculate(finValue));
+                output += String.format("\\hspace{1.4cm} f(x_m)f(x_u)\\hspace{0.4cm}=\\hspace{0.4cm}f(%.10f)*f(%.10f) = \\hspace{0.4cm}%.10f \\hspace{0.4cm}which \\hspace{0.4cm}is \\hspace{0.4cm} < 0\\\\", midValue, finValue, function.calculate(midValue) * function.calculate(finValue));
                 output += String.format("\\hspace{1.4cm} Therefore\\hspace{0.4cm} a \\hspace{0.4cm} solution\\hspace{0.4cm} exists\\hspace{0.4cm}  between \\hspace{0.4cm} %.10f  \\hspace{0.4cm} and\\hspace{0.4cm}  %.10f \\\\", midValue, finValue);
 
                 output += String.format("\\hspace{1.4cm} Testing \\hspace{0.4cm} with \\hspace{0.4cm} new \\hspace{0.4cm} constraints\\hspace{0.4cm}:\\hspace{0.4cm}  %.10f,\\hspace{0.4cm}  %.10f\\\\", initValue, finValue);
@@ -321,7 +321,7 @@ public class BisectionController {
         output+= ("\\hspace{1.4cm}Calculating\\hspace{0.4cm} absolute\\hspace{0.4cm}relative \\hspace{0.4cm}approximate\\hspace{0.4cm} error\\hspace{0.4cm}to \\hspace{0.4cm}check\\hspace{0.4cm}if\\hspace{0.4cm}we\\hspace{0.4cm}have\\hspace{0.4cm}met\\hspace{0.4cm}stopping\\hspace{0.4cm}criteria  \\\\");
         output += "\\hspace{1.4cm} \\left|\\varepsilon_a\\right| = \\left|\\frac{{x_m}^{new} \\hspace{0.4cm}- \\hspace{0.4cm}{x_m}^{old}}{{x_m}^{new}}\\right| \\\\";
         double abs = Math.abs(((x2 - x1) / x2));
-        output+= String.format("\\hspace{1.4cm} \\left|\\frac{(%.15f - %.15f)}{%.15f}\\right|  = %.10f \\\\", x2,x1,x2 , abs);
+        output+= String.format("\\hspace{1.4cm} \\left|\\frac{(%.10f - %.10f)}{%.10f}\\right|  = %.10f \\\\", x2,x1,x2 , abs);
         output+="\\\\" ;
         output+="\\\\" ;
         return abs;
